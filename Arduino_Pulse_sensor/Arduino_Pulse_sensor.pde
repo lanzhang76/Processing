@@ -10,14 +10,15 @@ boolean open;
 boolean measure;
 
 void setup(){
-  fullScreen();
+  //fullScreen();
+  size(800,480);
   font = createFont("Roboto-Light", 22); 
   //size(800,600);
   background(255);
-  frameRate(60);
+  frameRate(30);
 println(Serial.list());
 //String Sensor = Serial.list()[2];
-myPort = new Serial(this,Serial.list()[2],115200);
+myPort = new Serial(this,Serial.list()[4],115200);
 
 beginRecord(PDF, "love_letter.pdf");
 }
@@ -54,7 +55,6 @@ void draw(){
     float r = SensorHeight/30;
     noStroke();
     ellipse(xPos, yPos+random(-8,8),r,r);
-    
     oldSensorHeight = SensorHeight;
     
   
@@ -63,29 +63,27 @@ void draw(){
     xPos  = 0;
     yPos += 40;
     OldyPos += 40;
-    
-    //background(255);
   } else {
     xPos ++;
   }
 
   save("here.png");
   
-  int timeDisplay;
-  float m = millis()/1000;
-    if (m > 0 || m<=30){
-      //timeDisplay = int(100 - m);
-      timeDisplay = int(m);
-      fill(255);
-      noStroke();
-      rect(1144,4,60,70);
-      fill(0);
-      text("Time:"+timeDisplay, 1100,40);
+  //int timeDisplay;
+  //float m = millis()/1000;
+  //  if (m > 0 || m<=30){
+  //    //timeDisplay = int(100 - m);
+  //    timeDisplay = int(m);
+  //    fill(255);
+  //    noStroke();
+  //    rect(1144,4,60,70);
+  //    fill(0);
+  //    text("Time:"+timeDisplay, 1100,40);
     //  m *= 0;
     //} 
     //if (m >= 30){
       //m = 0;
-    }
+    //}
     
     
     //println(m);
@@ -104,7 +102,7 @@ void serialEvent(Serial myPort){
   //int inByte = myPort.read();
   //println(inByte);
     //draw
-   SensorHeight = map(currentSensorRate,0,1000,100,500);  
+   SensorHeight = map(currentSensorRate,0,1000,100,400);  
    println(SensorHeight); 
    
   }
